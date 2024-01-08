@@ -31,7 +31,6 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'username' => 'required|string|unique:users', // Pastikan username unik
             'password' => 'required|string|min:8',
             'no_telp' => 'required|string',
             'tanggal_lahir' => 'required|date',
@@ -47,7 +46,6 @@ class AuthController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'username' => $request->username,
             'password' => Hash::make($request->password),
             'no_telp' => $request->no_telp,
             'tanggal_lahir' => $request->tanggal_lahir,
@@ -66,16 +64,6 @@ class AuthController extends Controller
 
         public function login(Request $request)
     {
-        
-        $validator = Validator::make(request()->all(),[
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->messages());
-        }
-
         $credentials = $request->only('email', 'password');
         if (! $token = auth()->attempt($credentials)){
             return response()->json(['error' => 'Unauthorized'],401);
@@ -83,7 +71,6 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
         
     }
-        
 
     /**
      * Get the authenticated User.
@@ -114,7 +101,16 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(JWTAuth::refresh());
+        try {
+            $newToken = JWTAuth::parseToken()->refresh();
+            return $this->respondWithToken($newToken);
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['error' => 'Token is invalid'], 401);
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['error' => 'Token has expired'], 401);
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['error' => 'Something went wrong while refreshing token'], 500);
+        }    
     }
 
     /**

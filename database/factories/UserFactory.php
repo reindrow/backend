@@ -18,7 +18,6 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'username' => $this->faker->userName(),
             'password' => bcrypt($this->faker->password()),
             'no_telp'=>$this->faker->phoneNumber(), 
             'tanggal_lahir'=>$this->faker->date(),

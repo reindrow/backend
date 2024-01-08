@@ -12,7 +12,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable,HasFactory,HasApiTokens;
-    protected $fillable = ['name', 'username', 'password','no_telp','tanggal_lahir','jenis_kelamin','alamat','email'];
+    
+    protected $primaryKey = 'id_user'; // Menentukan nama kolom kunci utama
+
+    protected $fillable = ['name', 'password','no_telp','tanggal_lahir','jenis_kelamin','alamat','email'];
     protected $hidden = ['password','id_role'];
     protected $table = 'users';
     
