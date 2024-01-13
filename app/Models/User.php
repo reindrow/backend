@@ -18,13 +18,12 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = ['name', 'password','no_telp','tanggal_lahir','jenis_kelamin','alamat','email'];
     protected $hidden = ['password','id_role'];
     protected $table = 'users';
-    
     public function role(){
         return $this->hasOne(role::class);
     }
 
-    public function lokasi(){
-        return $this->hasOne(lokasi::class);
+    public function lokasi() {
+        return $this->belongsTo(lokasi::class, 'id_lokasi');
     }
 
     public function voucher(){
