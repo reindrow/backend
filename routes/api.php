@@ -47,10 +47,10 @@ Route::get('/lokasis', [LokasiController::class, 'index']);
 Route::post('/lokasis', [LokasiController::class, 'store']);
 Route::delete('/lokasis/{id}', [LokasiController::class, 'destroy']);
 Route::put('/lokasis/{id}', [LokasiController::class, 'update']);
-
-//Server Route
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/', [UserController::class, 'chooseLocation']);
 });
-
 Route::post('/choose-location', [UserController::class, 'chooseLocation']);
+
+//Server Route
+Route::post('/addServer', [ServerController::class, 'addServer']);

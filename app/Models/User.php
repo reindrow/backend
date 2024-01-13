@@ -14,7 +14,6 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable,HasFactory,HasApiTokens;
     
     protected $primaryKey = 'id_user'; // Menentukan nama kolom kunci utama
-
     protected $fillable = ['name', 'password','no_telp','tanggal_lahir','jenis_kelamin','alamat','email','id_lokasi'];
     protected $hidden = ['password','id_role'];
     protected $table = 'users';

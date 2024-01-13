@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_lokasi')->nullable();
             $table->foreign('id_lokasi')->references('id_lokasi')->on('lokasis');
             $table->string('email')->unique();
-            $table->unsignedBigInteger('id_role')->default(3);
+            $table->unsignedBigInteger('id_role');
             $table->foreign('id_role')->references('id_role')->on('roles');
             $table->timestamps();
         });

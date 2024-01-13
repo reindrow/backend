@@ -52,6 +52,8 @@ class AuthController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
             'email' => $request->email,
+            'id_role' => 3,
+
         ]);
 
         if ($user){
