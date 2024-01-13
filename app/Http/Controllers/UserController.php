@@ -59,5 +59,23 @@ class UserController extends Controller
             return response()->json(['message' => 'Failed to update customer data', 'error' => $e->getMessage()], 500);
         }
     }
-    
+    public function chooseLocation(Request $request)
+    {
+        // Validasi data yang dikirimkan untuk pemilihan lokasi
+        $validatedData = $request->validate([
+            'id_lokasi' => 'required|exists:lokasis,id_lokasi', // Pastikan id_lokasi yang dipilih ada di tabel lokasi
+        ]);
+
+        try {
+            // Mendapatkan user yang sedang autentikasi (server)
+            $server = $request->user();
+
+            // Update informasi lokasi pada user (server)
+            $server->update(['id_lokasi' => $validatedData['id_lokasi']]);
+
+            return response()->json(['message' => 'Lokasi berhasil dipilih'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal memilih lokasi', 'error' => $e->getMessage()], 500);
+        }
+    }
 }
