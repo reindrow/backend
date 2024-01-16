@@ -56,22 +56,17 @@ class LokasiController extends Controller
             'nama' => 'string|unique:lokasis,nama,' . $id,
             'alamat' => 'string',
             'kota' => 'string',
-            'kodepos' => 'string'
+            'kodepos' => 'string',
             // Sesuaikan aturan validasi dengan kebutuhan
         ]);
-
+    
         try {
-            // Temukan lokasi berdasarkan ID
+            // Update data lokasi langsung pada model tanpa menggunakan find terlebih dahulu
+            Lokasi::where('id_lokasi', $id)->update($validatedData);
+    
+            // Temukan lokasi setelah diupdate
             $lokasi = Lokasi::find($id);
-
-            // Periksa jika lokasi tidak ditemukan
-            if (!$lokasi) {
-                return response()->json(['message' => 'Lokasi not found'], 404);
-            }
-
-            // Lakukan update data lokasi
-            $lokasi->update($validatedData);
-
+    
             return response()->json(['message' => 'Lokasi updated successfully', 'lokasi' => $lokasi], 200);
         } catch (\Exception $e) {
             // Cetak pesan kesalahan
@@ -79,4 +74,5 @@ class LokasiController extends Controller
             return response()->json(['message' => 'Failed to update lokasi', 'error' => $e->getMessage()], 500);
         }
     }
+    
 }

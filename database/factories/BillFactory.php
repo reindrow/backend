@@ -23,8 +23,6 @@ class BillFactory extends Factory
         $randomUserId = $this->faker->randomElement($users); // Pilih secara acak ID user
         
         return [
-            'ref_id'=>$this->faker->randomElement(['101','202']),
-            'ref_type'=>$this->faker->randomNumber(8), 
             'id_user' => $randomUserId,
             'metode_pembayaran'=>$this->faker->randomElement(['Cash', 'E-Wallet']), 
             'status_pembayaran' => $this->faker->randomElement(['pending', 'confirmed', 'cancelled']),

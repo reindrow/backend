@@ -16,6 +16,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        
         return [
             'name' => $this->faker->name,
             'password' => bcrypt($this->faker->password()),
@@ -25,6 +26,7 @@ class UserFactory extends Factory
             'alamat'=>$this->faker->address(),
             'email' => $this->faker->unique()->safeEmail,
             'id_role'=> $this->faker->numberBetween(1,3),
+            
         ];
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('deskripsi');
             $table->float('harga');
             $table->integer('stok');
+            $table->enum('jenisproduk', ['jasa', 'barang', 'snack']);
             $table->timestamps();
         });
     }

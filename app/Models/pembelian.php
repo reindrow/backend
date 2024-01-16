@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class pembelian extends Model
 {
     use HasFactory;
-    protected $fillable = ['tanggal_pembelian'];
+    protected $primaryKey = 'id_pembelian';
+    protected $fillable = ['id_user','id_server','tanggal_pembelian'];
     protected $table = 'pembelians';
 
     public function pembelianitem(){

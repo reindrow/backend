@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id('id_pembelian');
             $table->date('tanggal_pembelian');
             $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id_user')->on('users');     
+            $table->unsignedBigInteger('id_server');
+            $table->foreign('id_user')->references('id_user')->on('users');    
+            $table->foreign('id_server')->references('id_user')->on('users')->where('id_role', 2); 
             $table->timestamps();
         });
     }

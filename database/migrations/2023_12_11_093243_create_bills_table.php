@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id('id_bill');
-            $table->integer('ref_id');
-            $table->integer('ref_type');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id_user')->on('users');
-            $table->string('status_pembayaran')->default('pending');
+            $table->string('status_pembayaran')->enum('jenisproduk', ['Lunas','Tidak Lunas']);
             $table->string('metode_pembayaran');            
             $table->timestamps();
         });

@@ -35,14 +35,11 @@ class UserController extends Controller
             'alamat' => 'string',
             // Sesuaikan aturan validasi dengan kebutuhan
         ]);
-
+    
         try {
             // Cetak data permintaan dan data yang divalidasi
             error_log('Request data: ' . print_r($request->all(), true));
             error_log('Validated data: ' . print_r($validatedData, true));
-    
-            // Lakukan update data pelanggan
-            User::where('id_user', $id)->update($validatedData);
     
             // Temukan pengguna berdasarkan ID dengan role 'pengguna' (role id 3)
             $customer = User::where('id_user', $id)->first();
@@ -52,6 +49,10 @@ class UserController extends Controller
                 return response()->json(['message' => 'Customer not found'], 404);
             }
     
+            // Update data pelanggan
+            $customer->fill($validatedData);
+            $customer->save();
+    
             return response()->json(['message' => 'Customer data updated successfully', 'customer' => $customer], 200);
         } catch (\Exception $e) {
             // Cetak pesan kesalahan
@@ -59,6 +60,8 @@ class UserController extends Controller
             return response()->json(['message' => 'Failed to update customer data', 'error' => $e->getMessage()], 500);
         }
     }
+    
+
     public function chooseLocation(Request $request)
     {
         // Validasi data yang dikirimkan untuk pemilihan lokasi

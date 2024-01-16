@@ -32,7 +32,7 @@ class BookingFactory extends Factory
             'id_lokasi' => $randomLokasiId,
             'id_voucher' => $randomVoucherId,
             'tanggal_booking' => $this->faker->dateTimeBetween('+1 day', '+7 days'),
-            'status' => $this->faker->randomElement(['request', 'reserved', 'finish']),
+            'status' => $this->faker->randomElement(['request', 'reserved','rejected','cancelled','finished']),
         ];
     }
 }

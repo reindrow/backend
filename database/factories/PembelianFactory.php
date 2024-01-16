@@ -17,11 +17,14 @@ class PembelianFactory extends Factory
     public function definition(): array
     {
 
-        $users = User::pluck('id_user')->toArray(); // Mendapatkan daftar ID dari tabel user
+        $users = User::where('id_role', 3)->get(); // Mendapatkan daftar ID dari tabel user
         $randomUserId = $this->faker->randomElement($users); // Pilih secara acak ID user
-
+        $server = User::where('id_role', 2)->get(); // Ambil semua user dengan id_role 2
+        $randomServerId = $this->faker->randomElement($server); // Pilih secara acak ID user
+    
         return [
             'id_user' => $randomUserId,
+            'id_server'=> $randomServerId,
             'tanggal_pembelian' => $this->faker->date(),
         ];
     }

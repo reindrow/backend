@@ -19,11 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_lokasi');
             $table->foreign('id_lokasi')->references('id_lokasi')->on('lokasis')->default(1);
             $table->dateTime('tanggal_booking');
-            $table->unsignedBigInteger('id_voucher');
-            $table->unsignedBigInteger('id_role')->default(3);
-            $table->foreign('id_role')->references('id_role')->on('users'); // Relasi foreign key ke id_role di tabel users
+            $table->unsignedBigInteger('id_voucher')->nullable();
             $table->foreign('id_voucher')->references('id_voucher')->on('vouchers')->onDelete('cascade');
-            $table->enum('status', ['request', 'reserved', 'finish'])->default('request');
+            $table->enum('status', ['request', 'reserved','rejected','cancelled','finished'])->default('request');
             // Tambahkan kolom status dengan tipe ENUM yang memiliki nilai 'request', 'reserved', dan 'finish'
             // Default status adalah 'request'
             $table->timestamps();

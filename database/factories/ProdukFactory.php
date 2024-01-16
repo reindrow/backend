@@ -21,6 +21,7 @@ class ProdukFactory extends Factory
             'deskripsi' => $this->faker->paragraph(2),
             'harga' => $this->faker->randomFloat(0, 23000, 9999),
             'stok'=>$this->faker->numberBetween(1, 100), 
+            'jenisproduk'=>$this->faker->randomElement(['jasa', 'barang', 'snack']),
         ];
     }
 }

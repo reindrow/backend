@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class bill extends Model
 {
     use HasFactory;
-    protected $fillable = ['ref_id','ref_type','status_pembayaran','metode_pembayaran'];
+    protected $fillable = ['id_user', 'status_pembayaran', 'metode_pembayaran'];
     protected $table = 'bills';
 
     public function pembelianitem(){
